@@ -2,14 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MusicInterface } from '../../interface/musicInterface';
 
 interface TodoState {
-  todos: MusicInterface[];
+  musics: MusicInterface[];
   loading: boolean
 }
 
 
 
 const initialState: TodoState = {
-  todos: [],
+  musics: [],
   loading: false
 };
 
@@ -17,13 +17,25 @@ const musicSlice = createSlice({
   name: 'music',
   initialState,
   reducers: {
-    addMusic: (state, action: PayloadAction<MusicInterface>) => {
-      state.todos.push(action.payload);
+    getMusicLoading: (state) => { // to load function in saga file
+      state.loading = true
+    },
+
+    getMusic: (state, action: PayloadAction<MusicInterface[]>) => { // get music list from saga and add to music store
+      state.loading = false
+      state.musics = [...action.payload];
 
     },
-    
+    deleteMusic: (state, action: PayloadAction<string>) => {
+      state.musics = state.musics.filter((music) => music._id !== action.payload);
+    },
+     addMusic: (state, action: PayloadAction<MusicInterface>) => {
+      state.musics.push(action.payload);
+
+    },
+
   },
 });
 
-export const { addMusic } = musicSlice.actions;
+export const { getMusicLoading, getMusic, deleteMusic,addMusic } = musicSlice.actions;
 export const musicReducer = musicSlice.reducer;

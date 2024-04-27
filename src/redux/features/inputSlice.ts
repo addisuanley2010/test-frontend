@@ -21,6 +21,7 @@ const inputSlice = createSlice({
             return state
 
         },
+        
     }
 })
 export const { addMusicToStore } = inputSlice.actions
