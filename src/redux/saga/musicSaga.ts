@@ -1,8 +1,10 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { api } from '../../api';
-import { addMusic, deleteMusic, getMusic, getMusicLoading } from '../features/musicSlice';
+import { addMusic, createMusicLoading, deleteMusic, getMusic, getMusicLoading } from '../features/musicSlice';
 import axios from 'axios';
 import { addMusicToStore } from '../features/inputSlice';
+import { MusicInterface } from '../../interface/musicInterface';
+import { PayloadAction } from '@reduxjs/toolkit';
 
 
 interface myType { type: string, _id?: string, title: string, artist: string, album: string, gener: string }
@@ -29,8 +31,10 @@ function* handleDeleteTodoSaga(action: mytype) {
   yield put(deleteMusic(id));
 }
 // ...................ADD MUSIC...............................
-function* handleAddMusic(action: myType) {
-  const { title, album, gener, artist } = action;
+function* handleAddMusic(action: PayloadAction<MusicInterface>) {
+// function* handleAddMusic(action: myType) {
+
+  const { title, album, gener, artist } = action.payload;
 
   try {
 
@@ -73,7 +77,10 @@ function* handleEditMusic(action: myType) {
 export function* watcMusicSaga() {
   yield takeEvery(getMusicLoading, handleGetMusic);
   yield takeEvery('DELETE', handleDeleteTodoSaga);
-  yield takeEvery('CREATE_MUSIC', handleAddMusic);
+  // yield takeEvery('CREATE_MUSIC', handleAddMusic);
   yield takeEvery('GET_SINGLE', handleSingle);
   yield takeEvery('UPDATE_MUSIC', handleEditMusic);
+  yield takeEvery(createMusicLoading, handleAddMusic);
+
+
 }

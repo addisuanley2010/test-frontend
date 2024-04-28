@@ -20,6 +20,10 @@ const musicSlice = createSlice({
     getMusicLoading: (state) => { // to load function in saga file
       state.loading = true
     },
+    createMusicLoading: (state, action: PayloadAction<MusicInterface>) => {
+      state.loading = true
+    },
+
 
     getMusic: (state, action: PayloadAction<MusicInterface[]>) => { // get music list from saga and add to music store
       state.loading = false
@@ -29,13 +33,14 @@ const musicSlice = createSlice({
     deleteMusic: (state, action: PayloadAction<string>) => {
       state.musics = state.musics.filter((music) => music._id !== action.payload);
     },
-     addMusic: (state, action: PayloadAction<MusicInterface>) => {
+    addMusic: (state, action: PayloadAction<MusicInterface>) => {
       state.musics.push(action.payload);
+      state.loading = false
 
     },
 
   },
 });
 
-export const { getMusicLoading, getMusic, deleteMusic,addMusic } = musicSlice.actions;
+export const { getMusicLoading, getMusic, deleteMusic, addMusic, createMusicLoading } = musicSlice.actions;
 export const musicReducer = musicSlice.reducer;

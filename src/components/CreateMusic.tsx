@@ -7,6 +7,7 @@ import { RootState } from '../store';
 import { addMusicToStore } from '../redux/features/inputSlice';
 import { StyledButton } from '../styles/Button.style';
 import { StyledForm, StyledInput } from '../styles/Form.style';
+import { createMusicLoading } from '../redux/features/musicSlice';
 
 
 
@@ -29,7 +30,9 @@ const CreateMusic = () => {
     if (musicInput.album == '' || musicInput.title == '' || musicInput.artist == '' || musicInput.gener == '') {
       alert('please fill all the fields')
     } else {
-      dispatch({ type: 'CREATE_MUSIC', ...musicInput })
+      // dispatch({ type: 'CREATE_MUSIC', ...musicInput })
+            dispatch(createMusicLoading(musicInput))
+
       dispatch(
         addMusicToStore({
           _id: '',

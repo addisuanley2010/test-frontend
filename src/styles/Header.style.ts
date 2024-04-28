@@ -7,6 +7,7 @@ export const HeaderStyle = styled.header`
   font-size: 24px;
   font-weight: bold;
   opacity  :0.9 ;
+  overflow-x: auto;
   
 `;
 export const StyledNav = styled.nav`
