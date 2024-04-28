@@ -4,13 +4,15 @@ import { MusicInterface } from '../../interface/musicInterface';
 interface TodoState {
   musics: MusicInterface[];
   loading: boolean
+  errorMessage: string
 }
 
 
 
 const initialState: TodoState = {
   musics: [],
-  loading: false
+  loading: false,
+  errorMessage: ''
 };
 
 const musicSlice = createSlice({
@@ -20,11 +22,19 @@ const musicSlice = createSlice({
     getMusicLoading: (state) => { // to load function in saga file
       state.loading = true
     },
-    createMusicLoading: (state, action: PayloadAction<MusicInterface>) => {
+    makeLoading: (state) => {//to make loading true
       state.loading = true
     },
-
-
+    closeLoading: (state, action: PayloadAction<string>) => {// to close loading in case failre happen
+      state.loading = false
+      state.errorMessage = action.payload
+    },
+    closeErrorMessage: (state) => {
+      state.errorMessage = ''
+    },
+    // createMusicLoading: (state, action: PayloadAction<MusicInterface>) => {
+    //   state.loading = true
+    // },
     getMusic: (state, action: PayloadAction<MusicInterface[]>) => { // get music list from saga and add to music store
       state.loading = false
       state.musics = [...action.payload];
@@ -32,15 +42,18 @@ const musicSlice = createSlice({
     },
     deleteMusic: (state, action: PayloadAction<string>) => {
       state.musics = state.musics.filter((music) => music._id !== action.payload);
-    },
-    addMusic: (state, action: PayloadAction<MusicInterface>) => {
-      state.musics.push(action.payload);
       state.loading = false
+
+    },
+    addMusic: (state, action: PayloadAction<MusicInterface>) => {//add single music to the store
+
+      state.loading = false
+      state.musics.push(action.payload);
 
     },
 
   },
 });
 
-export const { getMusicLoading, getMusic, deleteMusic, addMusic, createMusicLoading } = musicSlice.actions;
+export const { closeErrorMessage, closeLoading, makeLoading, getMusicLoading, getMusic, deleteMusic, addMusic } = musicSlice.actions;
 export const musicReducer = musicSlice.reducer;

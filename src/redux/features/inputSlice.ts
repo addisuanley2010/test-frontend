@@ -9,8 +9,6 @@ const initialState: MusicInterface = {
     gener: ''
 };
 
-
-
 const inputSlice = createSlice({
     name: 'musicInput',
     initialState,

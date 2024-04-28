@@ -1,14 +1,15 @@
 
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MusicInterface } from '../interface/musicInterface';
 import { RootState } from '../store';
 import { addMusicToStore } from '../redux/features/inputSlice';
 import { StyledButton } from '../styles/Button.style';
 import { StyledForm, StyledInput } from '../styles/Form.style';
-import { useParams } from 'react-router-dom';
-import { getMusicLoading } from '../redux/features/musicSlice';
+import { useNavigate, useParams } from 'react-router-dom';
+import { closeErrorMessage, getMusicLoading, makeLoading } from '../redux/features/musicSlice';
+import Loading from './Loading';
 
 
 
@@ -20,11 +21,13 @@ const UpdateMusic = () => {
   const loading: boolean = useSelector((state: RootState) => state.music.loading);
 
   const dispatch = useDispatch();
-
+  const navigate = useNavigate()
   const { id } = useParams()
   useEffect(() => {
 
     dispatch({ type: 'GET_SINGLE', id })
+
+
 
 
   }, [dispatch])
@@ -46,19 +49,32 @@ const UpdateMusic = () => {
       alert('please fill all the fields')
     } else {
       dispatch({ type: 'UPDATE_MUSIC', ...musicInput })
-      dispatch(getMusicLoading())
+      dispatch(makeLoading())
+
+      // dispatch(getMusicLoading())
 
     }
   };
 
+  const errorMessage: string = useSelector((state: RootState) => state.music.errorMessage);
+
+
 
   if (loading) {
     return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
+      <Loading />
+
     )
   }
+
+  if (errorMessage !== '') {
+    alert(errorMessage)
+    dispatch(closeErrorMessage())
+    navigate('/')
+  }
+
+
+  
   return (<>
     <StyledForm onSubmit={handleSubmit}>
       <h2>Update Music</h2>

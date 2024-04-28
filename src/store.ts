@@ -5,6 +5,7 @@ import { inputReducer } from './redux/features/inputSlice'
 import { musicReducer } from './redux/features/musicSlice'
 
 import { rootSaga } from './redux/saga/rootSaga';
+import { statReducer } from './redux/features/statSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -13,7 +14,8 @@ const sagaMiddleware = createSagaMiddleware();
 export const store = configureStore({
   reducer: {
     music: musicReducer,
-    inputMusic: inputReducer
+    inputMusic: inputReducer,
+    stat:statReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

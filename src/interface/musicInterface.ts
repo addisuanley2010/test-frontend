@@ -5,3 +5,9 @@ export interface MusicInterface {
   album: string;
   gener: string;
 }
+export interface StatInterface {
+  totalMusic: number,
+    totalArtists: number,
+   totalAlbums: number,
+    totalGenres: number,
+}

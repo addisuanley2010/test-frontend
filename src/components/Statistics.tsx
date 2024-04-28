@@ -1,28 +1,32 @@
 import { useState } from 'react';
 import { Circle, StatisticItem, StatisticLabel, StatisticsContainer } from '../styles/Statistics.style';
 import MusicList from './MusicList';
-const Statistics = ({ totalMusic = 12, totalArtist = 12, totalAlbum = 12, totalGenre = 12 }) => {
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
+import { StatInterface } from '../interface/musicInterface';
+const Statistics = () => {
   const [num, setNum] = useState<number>(0);
 
+  const statValue: StatInterface = useSelector((state: RootState) => state.stat);
 
 
   return (
     <>
       <StatisticsContainer>
         <StatisticItem onClick={() => { setNum(0) }}>
-          <Circle>{totalMusic}</Circle>
+          <Circle>{statValue.totalMusic}</Circle>
           <StatisticLabel>Total Music</StatisticLabel>
         </StatisticItem>
         <StatisticItem onClick={() => { setNum(1) }}>
-          <Circle>{totalArtist}</Circle>
+          <Circle>{statValue.totalArtists}</Circle>
           <StatisticLabel>Total Artist</StatisticLabel>
         </StatisticItem>
         <StatisticItem onClick={() => { setNum(2) }}>
-          <Circle>{totalAlbum}</Circle>
+          <Circle>{statValue.totalAlbums}</Circle>
           <StatisticLabel>Total Album</StatisticLabel>
         </StatisticItem>
         <StatisticItem onClick={() => { setNum(3) }}>
-          <Circle>{totalGenre}</Circle>
+          <Circle>{statValue.totalGenres}</Circle>
           <StatisticLabel>Total Genre</StatisticLabel>
         </StatisticItem>
       </StatisticsContainer>

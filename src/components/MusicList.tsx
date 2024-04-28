@@ -7,7 +7,8 @@ import {
 } from "../styles/Table.style";
 import { StyledButton } from "../styles/Button.style";
 import { useNavigate } from "react-router-dom";
-import { getMusicLoading } from "../redux/features/musicSlice";
+import { closeErrorMessage, getMusicLoading, makeLoading } from "../redux/features/musicSlice";
+import Loading from "./Loading";
 
 const MusicList = () => {
   const navigate = useNavigate()
@@ -21,7 +22,9 @@ const MusicList = () => {
     const confir: boolean = window.confirm('Are you sure?');
     if (confir) {
       dispatch({ type: 'DELETE', id })
-      dispatch(getMusicLoading())
+      // dispatch(getMusicLoading())
+      dispatch(makeLoading())
+
 
     };
   }
@@ -32,17 +35,22 @@ const MusicList = () => {
 
   const loading: boolean = useSelector((state: RootState) => state.music.loading);
 
+  const errorMessage: string = useSelector((state: RootState) => state.music.errorMessage);
 
 
-
+  if (errorMessage !== '') {
+    alert(errorMessage)
+    dispatch(closeErrorMessage())
+  }
 
   if (loading) {
     return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
+      <Loading />
+
     )
   }
+
+
   return (
     <TableContainer>
       <StyledTable >

@@ -7,7 +7,8 @@ import { RootState } from '../store';
 import { addMusicToStore } from '../redux/features/inputSlice';
 import { StyledButton } from '../styles/Button.style';
 import { StyledForm, StyledInput } from '../styles/Form.style';
-import { createMusicLoading } from '../redux/features/musicSlice';
+import { closeErrorMessage, makeLoading } from '../redux/features/musicSlice';
+import Loading from './Loading';
 
 
 
@@ -17,6 +18,7 @@ const CreateMusic = () => {
 
   const musicInput: MusicInterface = useSelector((state: RootState) => state.inputMusic);
   const loading: boolean = useSelector((state: RootState) => state.music.loading);
+  const errorMessage: string = useSelector((state: RootState) => state.music.errorMessage);
 
   const dispatch = useDispatch();
 
@@ -30,8 +32,9 @@ const CreateMusic = () => {
     if (musicInput.album == '' || musicInput.title == '' || musicInput.artist == '' || musicInput.gener == '') {
       alert('please fill all the fields')
     } else {
-      // dispatch({ type: 'CREATE_MUSIC', ...musicInput })
-            dispatch(createMusicLoading(musicInput))
+      dispatch({ type: 'CREATE_MUSIC', ...musicInput })
+      dispatch(makeLoading())
+      // dispatch(createMusicLoading(musicInput))
 
       dispatch(
         addMusicToStore({
@@ -45,23 +48,32 @@ const CreateMusic = () => {
     }
   };
 
-if(loading){
-  return(
-    <div>
-      <h1>Loading...</h1>
-    </div>
-  )
-}
+
+
+
+  if (errorMessage !== '') {
+    dispatch(closeErrorMessage())
+
+    alert(errorMessage)
+  }
+
+  if (loading) {
+    return (
+      <Loading />
+
+    )
+  }
+
   return (<>
     <StyledForm onSubmit={handleSubmit}>
-        <h2>Create Music</h2>
+      <h2>Create Music</h2>
 
       <StyledInput
         type="text"
         value={musicInput.title}
         onChange={handleChange("title")}
         placeholder="title" />
-      
+
       <StyledInput
         type="text"
         value={musicInput.artist}
@@ -84,7 +96,7 @@ if(loading){
 
       <StyledButton type="submit">Create Music</StyledButton>
     </StyledForm>
-      </>
+  </>
 
   );
 };

@@ -5,14 +5,15 @@ import { useEffect } from "react";
 import { getMusicLoading } from "../redux/features/musicSlice";
 
 const Layout = () => {
-       
-  const dispatch = useDispatch()
-  useEffect(() => {
 
-    dispatch(getMusicLoading())
+        const dispatch = useDispatch()
+        useEffect(() => {
+                dispatch({ type: 'GET_STATISTICS' })
 
-    // dispatch(addMusicYes(makeNullInput))
-  }, [dispatch])
+                dispatch(getMusicLoading())
+
+                // dispatch(addMusicYes(makeNullInput))
+        }, [dispatch])
 
 
         return (
