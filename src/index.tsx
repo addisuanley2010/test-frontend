@@ -5,12 +5,12 @@ import { store } from './store';
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from './components/Layout';
-import Home from './components/Home';
 import ErrorPage from './components/ErrorPage';
 import CreateMusic from './components/CreateMusic';
 import Statistics from './components/Statistics';
 import UpdateMusic from './components/UpdateMusic';
-
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 const router = createBrowserRouter([
   {
     path: '/',
@@ -20,7 +20,6 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <App /> },
-      { path: "/home", element: <Home /> },
       { path: "/create-music", element: <CreateMusic /> },
       { path: "/statistics", element: <Statistics /> },
             { path: "/edit-music/:id", element: <UpdateMusic /> },
@@ -39,6 +38,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
+        <ToastContainer />
     <RouterProvider router={router} />
   </Provider>
 );

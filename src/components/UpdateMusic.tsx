@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MusicInterface } from '../interface/musicInterface';
 import { RootState } from '../store';
 import { addMusicToStore } from '../redux/features/inputSlice';
-import { StyledButton } from '../styles/Button.style';
+import { StyledButton } from '../styles/Form.style';
 import { StyledForm, StyledInput } from '../styles/Form.style';
 import { useNavigate, useParams } from 'react-router-dom';
-import { closeErrorMessage, getMusicLoading, makeLoading } from '../redux/features/musicSlice';
+import { closeErrorMessage, makeLoading } from '../redux/features/musicSlice';
 import Loading from './Loading';
+import { toast } from 'react-toastify';
 
 
 
@@ -68,13 +69,16 @@ const UpdateMusic = () => {
   }
 
   if (errorMessage !== '') {
-    alert(errorMessage)
+    toast.info(errorMessage, {
+      position: "top-center",
+      autoClose: 1000,
+    });
     dispatch(closeErrorMessage())
     navigate('/')
   }
 
 
-  
+
   return (<>
     <StyledForm onSubmit={handleSubmit}>
       <h2>Update Music</h2>

@@ -4,6 +4,9 @@ import MusicList from './MusicList';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { StatInterface } from '../interface/musicInterface';
+import Artists from './Artists';
+import Albums from './Albums';
+import Geners from './Geners';
 const Statistics = () => {
   const [num, setNum] = useState<number>(0);
 
@@ -33,9 +36,9 @@ const Statistics = () => {
       <hr />
 
       {num == 0 && <MusicList />}
-      {num == 1 && <div>this is for artist</div>}
-      {num == 2 && <div>this is for album</div>}
-      {num == 3 && <div>this is for gener</div>}
+      {num == 1 && <Artists />}
+      {num == 2 && <Albums />}
+      {num == 3 && <Geners />}
 
     </>
 

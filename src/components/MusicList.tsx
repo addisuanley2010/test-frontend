@@ -9,6 +9,7 @@ import { StyledButton } from "../styles/Button.style";
 import { useNavigate } from "react-router-dom";
 import { closeErrorMessage, getMusicLoading, makeLoading } from "../redux/features/musicSlice";
 import Loading from "./Loading";
+import { toast } from "react-toastify";
 
 const MusicList = () => {
   const navigate = useNavigate()
@@ -39,8 +40,10 @@ const MusicList = () => {
 
 
   if (errorMessage !== '') {
-    alert(errorMessage)
-    dispatch(closeErrorMessage())
+    toast.info(errorMessage, {
+      position: "top-center",
+      autoClose: 1000,
+    }); dispatch(closeErrorMessage())
   }
 
   if (loading) {
@@ -51,7 +54,14 @@ const MusicList = () => {
   }
 
 
-  return (
+  return (<>
+
+{musicList.length === 0?
+<div>
+
+      <h1>No Data Here</h1>
+      </div>
+:
     <TableContainer>
       <StyledTable >
         <thead>
@@ -80,7 +90,7 @@ const MusicList = () => {
           ))}
         </tbody>
       </StyledTable>
-    </TableContainer>
+    </TableContainer>}</>
   );
 };
 

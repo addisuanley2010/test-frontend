@@ -3,6 +3,8 @@ import { getMusicLoading } from "./redux/features/musicSlice";
 import { useDispatch } from "react-redux";
 import { MusicInterface } from "./interface/musicInterface";
 import MusicList from "./components/MusicList";
+import { addMusicToStore } from "./redux/features/inputSlice";
+import SideNav from "./components/SideNav";
 
 
 function App() {
@@ -19,7 +21,7 @@ function App() {
 
     dispatch(getMusicLoading())
 
-    // dispatch(addMusicYes(makeNullInput))
+    dispatch(addMusicToStore(makeNullInput))
   }, [dispatch])
 
   return (

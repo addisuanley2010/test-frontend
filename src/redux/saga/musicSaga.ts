@@ -3,8 +3,8 @@ import { api } from '../../api';
 import { addMusic, closeLoading, deleteMusic, getMusic, getMusicLoading } from '../features/musicSlice';
 import axios from 'axios';
 import { addMusicToStore } from '../features/inputSlice';
-import { MusicInterface } from '../../interface/musicInterface';
 import { getStat } from '../features/statSlice';
+import { getArtist } from '../features/countSlice';
 
 
 interface myType { type: string, _id?: string, title: string, artist: string, album: string, gener: string }
@@ -94,9 +94,10 @@ function* handleEditMusic(action: myType) {
 function* getStatics() {
 
   const { data } = yield call(axios.get, `${api}/getStatistics`)
-  console.log(data)
+  console.log(data.counts)
   const { totalAlbums, totalArtists, totalGenres, totalMusic } = yield data
   yield put(getStat({ totalAlbums, totalArtists, totalGenres, totalMusic }))
+  yield put(getArtist(data.counts))
 }
 
 

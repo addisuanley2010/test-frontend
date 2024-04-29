@@ -15,6 +15,11 @@ export const StyledForm = styled.form`
         text-align: center;
         text-decoration: underline;
   }
+   @media (max-width: 768px) {
+      padding: 0px 30px;
+      margin: 0px;
+
+  }
 `;
 
 export const StyledInput = styled.input`
@@ -37,12 +42,16 @@ export const StyledInput = styled.input`
     border-color: #ff69b4;
     box-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
   }
+  @media (max-width: 768px) {
+      margin: 10px;
+
+  }
 `;
 
 export const StyledButton = styled.button`
   padding: 14px 28px;
   font-size: 18px;
-  background-color: #ff69b4;
+  background-color: #487CE2;
   color: white;
   border: none;
   border-radius: 4px;
@@ -50,6 +59,13 @@ export const StyledButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #ff1493;
+    background-color: #25B2D1;
+  }
+  @media(max-width: 768px){
+width: 200px;
+padding: 12px;
+align-self: center;
+margin-bottom:20px;
+margin-top: 10px;
   }
 `;

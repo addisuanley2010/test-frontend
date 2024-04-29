@@ -1,14 +1,15 @@
 
 
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MusicInterface } from '../interface/musicInterface';
 import { RootState } from '../store';
 import { addMusicToStore } from '../redux/features/inputSlice';
-import { StyledButton } from '../styles/Button.style';
+import { StyledButton } from '../styles/Form.style';
 import { StyledForm, StyledInput } from '../styles/Form.style';
 import { closeErrorMessage, makeLoading } from '../redux/features/musicSlice';
 import Loading from './Loading';
+import { toast } from 'react-toastify';
 
 
 
@@ -30,7 +31,10 @@ const CreateMusic = () => {
 
 
     if (musicInput.album == '' || musicInput.title == '' || musicInput.artist == '' || musicInput.gener == '') {
-      alert('please fill all the fields')
+      toast.warn("fill all the fields", {
+        position: "top-center",
+        autoClose: 1000,
+      });
     } else {
       dispatch({ type: 'CREATE_MUSIC', ...musicInput })
       dispatch(makeLoading())
@@ -54,7 +58,11 @@ const CreateMusic = () => {
   if (errorMessage !== '') {
     dispatch(closeErrorMessage())
 
-    alert(errorMessage)
+    // alert(errorMessage)
+    toast.info(errorMessage, {
+      position: "top-center",
+      autoClose: 1000,
+    });
   }
 
   if (loading) {
