@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { GrEdit } from "react-icons/gr";
 
 import {
+  ButtonDiv,
   ButtonIcon,
   Delete,
   Edit,
@@ -89,8 +90,11 @@ const MusicList = () => {
                 <td>{row.album}</td>
                 <td>{row.gener}</td>
                 <td>
-                  <StyledButton bg="" onClick={() => handleEdit(row._id)}>Edit</StyledButton>
+                  <ButtonDiv>
+                      <StyledButton bg="" onClick={() => handleEdit(row._id)}>Edit</StyledButton>
                   <StyledButton bg="#B74C4C" onClick={() => handleDelete(row._id)}>Delete</StyledButton>
+                  </ButtonDiv>
+                 
                   <ButtonIcon>
                     <Edit onClick={() => handleEdit(row._id)}><GrEdit /></Edit>
                     <Delete onClick={() => handleDelete(row._id)}> <MdDelete />

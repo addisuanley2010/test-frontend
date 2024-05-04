@@ -60,3 +60,13 @@ margin-left: 5px;
 font-size: 15px;
 border: none;
 `
+
+export const ButtonDiv = styled.span`
+display: flex;
+justify-content: center;
+margin: 0px;
+
+
+
+
+`
