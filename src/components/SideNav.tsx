@@ -5,19 +5,19 @@ import { toggleSideNav } from '../redux/features/sideNavSlice';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
+import { PiMusicNotesPlus } from 'react-icons/pi';
+import { ImStatsDots } from 'react-icons/im';
 
 const SideNavContainer = styled.div`
   width: 250px;
   height: 100vh;
   background-color: #f2f2f2;
   display: none;
-  @media(max-width: 768px){
-display: block;
-position: fixed;
-top: 10%;
-
+  @media (max-width: 768px) {
+    display: block;
+    position: fixed;
+    top: 10%;
   }
-  
 `;
 
 const SideNavContent = styled.div`
@@ -29,42 +29,79 @@ const NavItem = styled.div`
   cursor: pointer;
 `;
 
-export const NavText = styled.span`
-  font-size: 16px;
+const NavLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
   color: #333;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  &:hover{
+        background-color: #0B48A3;
+        color:white
+  }
 `;
 
+const NavText = styled.span`
+  font-size: 20px;
+  margin-left: 10px;
+    margin-top: 10px;
 
+  
+`;
+
+const NavIcon = styled.span`
+  font-size: 20px;
+      margin-top: 10px;
+
+`;
 
 const SideNav: React.FC = () => {
-        const dispatch = useDispatch();
-        const isSideNavOpen: boolean = useSelector((state: RootState) => state.sideNav.isOpen);
+  const dispatch = useDispatch();
+  const isSideNavOpen: boolean = useSelector(
+    (state: RootState) => state.sideNav.isOpen
+  );
 
-        const handleToggleSideNav = () => {
-                dispatch(toggleSideNav());
-        };
-        if (isSideNavOpen) {
-                return (
-                        <SideNavContainer >
-                                <SideNavContent>
-                                        <NavItem onClick={handleToggleSideNav}>
-                                                <NavText>            <Link to="/"><FaHome /> Home</Link>
-                                                </NavText>
-                                        </NavItem>
-                                        <NavItem onClick={handleToggleSideNav}>
-                                                <NavText>            <Link to="/create-music">Create Music</Link>
-                                                </NavText>
-                                        </NavItem>
-                                        <NavItem onClick={handleToggleSideNav}>
-                                                <NavText>            <Link to="/statistics">Statistics</Link>
-                                                </NavText>
-                                        </NavItem>
-                                </SideNavContent>
-                        </SideNavContainer>
-                );
-        } {
-                return <></>
-        }
+  const handleToggleSideNav = () => {
+    dispatch(toggleSideNav());
+  };
+
+  if (isSideNavOpen) {
+    return (
+      <SideNavContainer>
+        <SideNavContent>
+          <NavItem onClick={handleToggleSideNav}>
+            <NavLink to="/">
+              <NavIcon>
+                <FaHome />
+              </NavIcon>
+              <NavText>Home</NavText>
+            </NavLink>
+          </NavItem>
+          <NavItem onClick={handleToggleSideNav}>
+            <NavLink to="/create-music">
+              <NavIcon>
+                <PiMusicNotesPlus />
+              </NavIcon>
+              <NavText>Create Music</NavText>
+            </NavLink>
+          </NavItem>
+          <NavItem onClick={handleToggleSideNav}>
+            <NavLink to="/statistics">
+              <NavIcon>
+                <ImStatsDots />
+              </NavIcon>
+              <NavText>Statistics</NavText>
+            </NavLink>
+          </NavItem>
+        </SideNavContent>
+      </SideNavContainer>
+    );
+  } else {
+    return <></>;
+  }
 };
 
 export default SideNav;

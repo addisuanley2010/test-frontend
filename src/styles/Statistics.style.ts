@@ -35,7 +35,29 @@ export const StatisticLabel = styled.span`
   }
 `;
 
+export const Icon = styled.span`
+      font-size: 34px;
+      @media (max-width: 768px) {
+       font-size: 25px;
+
+  }
+
+`;
+
+
+export const Text = styled.span`
+    font-size: 20px;
+@media (max-width: 768px) {
+       font-size: 15px;
+
+  }
+`;
+
+
+
 export const Circle = styled.div`
+display: flex;
+flex-direction: column;
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -44,9 +66,9 @@ export const Circle = styled.div`
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 24px;
   font-weight: bold;
   cursor: pointer;
+
   &:hover{
     background-color: #D74F7A;
       
@@ -54,5 +76,6 @@ export const Circle = styled.div`
    @media (max-width: 768px) {
    width: 80px;
   height: 80px;
+
   }
 `;

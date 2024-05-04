@@ -7,7 +7,7 @@ interface ButtonProps {
 export const StyledButton = styled.button<ButtonProps>`
   padding: 10px 20px ;
   margin: 0 10px 0px 0px;
-
+  display: block;
   border: none;
   border-radius: 4px;
   font-size: 16px;
@@ -16,9 +16,7 @@ export const StyledButton = styled.button<ButtonProps>`
   background-color: ${(props) => props.bg || "#007bff"};
   cursor: pointer;
  @media (max-width: 768px) {
-      font-size: 10px;
-      margin: 0px;
-      width: 70px;
+      display: none;
   }
   &:hover {
     background-color: ${(props) => props.bg ? props.bg : "#0069d9"};

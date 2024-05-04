@@ -35,4 +35,28 @@ export const StyledTable = styled.table`
   }
 `;
 
+export const ButtonIcon = styled.span`
 
+display: none;
+@media (max-width: 768px) {
+    display: flex;
+    font-size: 15px;
+    padding-right: 10px;
+    justify-content: space-around;
+  }
+
+`
+
+
+export const Edit = styled.button`
+color: blue;
+border: none;
+font-size: 15px;
+`
+
+export const Delete = styled.button`
+color: red;
+margin-left: 5px;
+font-size: 15px;
+border: none;
+`

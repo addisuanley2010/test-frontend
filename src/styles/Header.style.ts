@@ -61,6 +61,15 @@ list-style: none;
 
   li {
     margin:10px 20px;
+border-radius:5px;
+padding-left: 10px;
+padding-right: 10px;
+padding-top: 5px;
+padding-bottom: 5px;
+  &:hover {
+      background-color: #045B92;
+    }
+   
 
   }
 
@@ -69,10 +78,7 @@ list-style: none;
     color: white;
     font-weight: bold;
     transition: color 0.5s;
-
-    &:hover {
-      color: gray;
-    }
+   
    
   }
    @media (max-width: 768px) {
@@ -80,3 +86,17 @@ list-style: none;
     }
 
 `
+export const StyledIcon = styled.span`
+  margin-right: 10px;
+`;
+
+export const NavText = styled.span`
+  font-size: 20px;
+`;
+
+
+export const Adda = styled.span`
+display: flex;
+justify-content: center;
+align-items: center;
+`;

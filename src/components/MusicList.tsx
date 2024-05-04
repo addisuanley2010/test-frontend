@@ -1,7 +1,13 @@
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../store";
 import { MusicInterface } from "../interface/musicInterface";
+import { MdDelete } from "react-icons/md";
+import { GrEdit } from "react-icons/gr";
+
 import {
+  ButtonIcon,
+  Delete,
+  Edit,
   StyledTable,
   TableContainer
 } from "../styles/Table.style";
@@ -56,41 +62,47 @@ const MusicList = () => {
 
   return (<>
 
-{musicList.length === 0?
-<div>
+    {musicList.length === 0 ?
+      <div>
 
-      <h1>No Data Here</h1>
+        <h1>No Data Here</h1>
       </div>
-:
-    <TableContainer>
-      <StyledTable >
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Title</th>
-            <th>Artist</th>
-            <th>Album</th>
-            <th>Genre</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {musicList.map((row, index) => (
-            <tr key={row._id}>
-              <td>{index + 1}</td>
-              <td>{row.title}</td>
-              <td>{row.artist}</td>
-              <td>{row.album}</td>
-              <td>{row.gener}</td>
-              <td>
-                <StyledButton bg="" onClick={() => handleEdit(row._id)}>Edit</StyledButton>
-                <StyledButton bg="#B74C4C" onClick={() => handleDelete(row._id)}>Delete</StyledButton>
-              </td>
+      :
+      <TableContainer>
+        <StyledTable >
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Title</th>
+              <th>Artist</th>
+              <th>Album</th>
+              <th>Genre</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </StyledTable>
-    </TableContainer>}</>
+          </thead>
+          <tbody>
+            {musicList.map((row, index) => (
+              <tr key={row._id}>
+                <td>{index + 1}</td>
+                <td>{row.title}</td>
+                <td>{row.artist}</td>
+                <td>{row.album}</td>
+                <td>{row.gener}</td>
+                <td>
+                  <StyledButton bg="" onClick={() => handleEdit(row._id)}>Edit</StyledButton>
+                  <StyledButton bg="#B74C4C" onClick={() => handleDelete(row._id)}>Delete</StyledButton>
+                  <ButtonIcon>
+                    <Edit onClick={() => handleEdit(row._id)}><GrEdit /></Edit>
+                    <Delete onClick={() => handleDelete(row._id)}> <MdDelete />
+                    </Delete>
+
+                  </ButtonIcon>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </StyledTable>
+      </TableContainer>}</>
   );
 };
 
